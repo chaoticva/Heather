@@ -1,0 +1,36 @@
+name: Build & Deploy to Repsy
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Grant execute permission for Gradle
+        run: chmod +x gradlew
+
+      - name: Run Java Linter (Checkstyle)
+        run: ./gradlew checkstyleMain || true
+
+      - name: Build and Test
+        run: ./gradlew build test
+
+      - name: Publish to Repsy
+        run: ./gradlew publish
+        env:
+          REPSY_USERNAME: ${{ secrets.REPSY_USERNAME }}
+          REPSY_PASSWORD: ${{ secrets.REPSY_PASSWORD }}
