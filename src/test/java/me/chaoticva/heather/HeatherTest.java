@@ -1,21 +1,22 @@
 package me.chaoticva.heather;
 
-import java.util.concurrent.atomic.AtomicReference;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
-class HeatherTest {
+import java.util.concurrent.atomic.*;
+
+class HeatherTest
+{
     @Test
-    public void testCreateInstance() {
+    public void testCreateInstance()
+    {
         Heather heather = Heather.create();
         assertNotNull(heather);
     }
 
     @Test
-    public void testSetMethod() {
+    public void testSetMethod()
+    {
         Heather heather = Heather.create()
                 .method(HttpMethod.DELETE);
 
@@ -23,7 +24,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSetUrl() {
+    public void testSetUrl()
+    {
         Heather heather = Heather.create()
                 .url("https://www.google.com");
 
@@ -31,7 +33,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSetBody() {
+    public void testSetBody()
+    {
         Heather heather = Heather.create()
                 .body("Hello, World!");
 
@@ -39,7 +42,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testAddHeader() {
+    public void testAddHeader()
+    {
         Heather heather = Heather.create()
                 .header("Custom-Header", "CustomValue");
 
@@ -48,7 +52,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testAddParam() {
+    public void testAddParam()
+    {
         Heather heather = Heather.create()
                 .param("limit", "1");
 
@@ -57,7 +62,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSetContentType() {
+    public void testSetContentType()
+    {
         Heather heather = Heather.create()
                 .contentType(ContentType.APPLICATION_JSON);
 
@@ -65,7 +71,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendGetRequestWithoutParams() {
+    public void testSendGetRequestWithoutParams()
+    {
         Heather heather = Heather.create()
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
                 .url("https://postman-echo.com/get");
@@ -79,7 +86,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendGetRequestWithParams() {
+    public void testSendGetRequestWithParams()
+    {
         Heather heather = Heather.create()
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
                 .url("https://postman-echo.com/get?marco=polo")
@@ -94,7 +102,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendPostRequestWithBody() {
+    public void testSendPostRequestWithBody()
+    {
         Heather heather = Heather.create()
                 .method(HttpMethod.POST)
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
@@ -110,7 +119,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendPostRequestWithoutBody() {
+    public void testSendPostRequestWithoutBody()
+    {
         Heather heather = Heather.create()
                 .method(HttpMethod.POST)
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
@@ -120,7 +130,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendRequestWithCustomHeaders() {
+    public void testSendRequestWithCustomHeaders()
+    {
         Heather heather = Heather.create()
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
                 .header("Custom-Header", "Custom Value")
@@ -133,7 +144,8 @@ class HeatherTest {
     }
 
     @Test
-    public void testSendRequestThrowsExceptionForInvalidUrl() {
+    public void testSendRequestThrowsExceptionForInvalidUrl()
+    {
         Heather heather = Heather.create()
                 .header("User-Agent", "Opera/9.60 (Windows NT 6.0; U; en) Presto/2.1.1")
                 .url("https://goggle.comm");
